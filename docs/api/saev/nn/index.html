@@ -82,7 +82,7 @@ sae: sparse autoencoder checkpoint to save.</p></div>
 <dl>
 <dt id="saev.nn.SparseAutoencoder"><code class="flex name class">
 <span>class <span class="ident">SparseAutoencoder</span></span>
-<span>(</span><span>cfg: <a title="saev.config.Relu" href="../config.html#saev.config.Relu">Relu</a> | <a title="saev.config.JumpRelu" href="../config.html#saev.config.JumpRelu">JumpRelu</a>)</span>
+<span>(</span><span>cfg: <a title="saev.config.Relu" href="../config.html#saev.config.Relu">Relu</a>)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Sparse auto-encoder (SAE) using L1 sparsity penalty.</p>
@@ -97,7 +97,7 @@ class SparseAutoencoder(torch.nn.Module):
     Sparse auto-encoder (SAE) using L1 sparsity penalty.
     &#34;&#34;&#34;
 
-    def __init__(self, cfg: config.SparseAutoencoder):
+    def __init__(self, cfg: config.Relu):
         super().__init__()
 
         self.cfg = cfg

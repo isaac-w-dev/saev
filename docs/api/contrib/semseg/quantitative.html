@@ -48,13 +48,13 @@ hljs.highlightAll();
 <div class="desc"></div>
 </dd>
 <dt id="contrib.semseg.quantitative.eval_auto_feat"><code class="name flex">
-<span>def <span class="ident">eval_auto_feat</span></span>(<span>cfg: <a title="contrib.semseg.config.Quantitative" href="config.html#contrib.semseg.config.Quantitative">Quantitative</a>,<br>sae: <a title="saev.nn.SparseAutoencoder" href="../../saev/nn.html#saev.nn.SparseAutoencoder">SparseAutoencoder</a>,<br>clf: torch.nn.modules.module.Module,<br>dataloader) ‑> <a title="contrib.semseg.quantitative.Report" href="#contrib.semseg.quantitative.Report">Report</a></span>
+<span>def <span class="ident">eval_auto_feat</span></span>(<span>cfg: <a title="contrib.semseg.config.Quantitative" href="config.html#contrib.semseg.config.Quantitative">Quantitative</a>,<br>sae: <a title="saev.nn.modeling.SparseAutoencoder" href="../../saev/nn/modeling.html#saev.nn.modeling.SparseAutoencoder">SparseAutoencoder</a>,<br>clf: torch.nn.modules.module.Module,<br>dataloader) ‑> <a title="contrib.semseg.quantitative.Report" href="#contrib.semseg.quantitative.Report">Report</a></span>
 </code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 <dt id="contrib.semseg.quantitative.eval_rand_feat"><code class="name flex">
-<span>def <span class="ident">eval_rand_feat</span></span>(<span>cfg: <a title="contrib.semseg.config.Quantitative" href="config.html#contrib.semseg.config.Quantitative">Quantitative</a>,<br>sae: <a title="saev.nn.SparseAutoencoder" href="../../saev/nn.html#saev.nn.SparseAutoencoder">SparseAutoencoder</a>,<br>clf: torch.nn.modules.module.Module,<br>dataloader) ‑> <a title="contrib.semseg.quantitative.Report" href="#contrib.semseg.quantitative.Report">Report</a></span>
+<span>def <span class="ident">eval_rand_feat</span></span>(<span>cfg: <a title="contrib.semseg.config.Quantitative" href="config.html#contrib.semseg.config.Quantitative">Quantitative</a>,<br>sae: <a title="saev.nn.modeling.SparseAutoencoder" href="../../saev/nn/modeling.html#saev.nn.modeling.SparseAutoencoder">SparseAutoencoder</a>,<br>clf: torch.nn.modules.module.Module,<br>dataloader) ‑> <a title="contrib.semseg.quantitative.Report" href="#contrib.semseg.quantitative.Report">Report</a></span>
 </code></dt>
 <dd>
 <div class="desc"><p>Evaluates the effects of suppressing a random SAE feature.</p>
@@ -73,7 +73,7 @@ hljs.highlightAll();
 <p>Report containing intervention results, including per-class changes</p></div>
 </dd>
 <dt id="contrib.semseg.quantitative.eval_rand_vec"><code class="name flex">
-<span>def <span class="ident">eval_rand_vec</span></span>(<span>cfg: <a title="contrib.semseg.config.Quantitative" href="config.html#contrib.semseg.config.Quantitative">Quantitative</a>,<br>sae: <a title="saev.nn.SparseAutoencoder" href="../../saev/nn.html#saev.nn.SparseAutoencoder">SparseAutoencoder</a>,<br>clf: torch.nn.modules.module.Module,<br>dataloader) ‑> <a title="contrib.semseg.quantitative.Report" href="#contrib.semseg.quantitative.Report">Report</a></span>
+<span>def <span class="ident">eval_rand_vec</span></span>(<span>cfg: <a title="contrib.semseg.config.Quantitative" href="config.html#contrib.semseg.config.Quantitative">Quantitative</a>,<br>sae: <a title="saev.nn.modeling.SparseAutoencoder" href="../../saev/nn/modeling.html#saev.nn.modeling.SparseAutoencoder">SparseAutoencoder</a>,<br>clf: torch.nn.modules.module.Module,<br>dataloader) ‑> <a title="contrib.semseg.quantitative.Report" href="#contrib.semseg.quantitative.Report">Report</a></span>
 </code></dt>
 <dd>
 <div class="desc"><p>Evaluates the effects of adding a random unit vector to the patches.</p>
@@ -92,7 +92,7 @@ hljs.highlightAll();
 <p>Report containing intervention results, including per-class changes</p></div>
 </dd>
 <dt id="contrib.semseg.quantitative.get_latent_lookup"><code class="name flex">
-<span>def <span class="ident">get_latent_lookup</span></span>(<span>cfg: <a title="contrib.semseg.config.Quantitative" href="config.html#contrib.semseg.config.Quantitative">Quantitative</a>,<br>sae: <a title="saev.nn.SparseAutoencoder" href="../../saev/nn.html#saev.nn.SparseAutoencoder">SparseAutoencoder</a>,<br>dataloader) ‑> jaxtyping.Int[Tensor, '151']</span>
+<span>def <span class="ident">get_latent_lookup</span></span>(<span>cfg: <a title="contrib.semseg.config.Quantitative" href="config.html#contrib.semseg.config.Quantitative">Quantitative</a>,<br>sae: <a title="saev.nn.modeling.SparseAutoencoder" href="../../saev/nn/modeling.html#saev.nn.modeling.SparseAutoencoder">SparseAutoencoder</a>,<br>dataloader) ‑> jaxtyping.Int[Tensor, '151']</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Dimension key:</p>

@@ -14,27 +14,26 @@
 Downloads the Begula whale dataset from lila.science.
 """
 
-import tyro
-import beartype
 import dataclasses
+
+import beartype
 import cv2
 import numpy as np
 import torch
-
+import tyro
 from pytorch_grad_cam import (
-    GradCAM,
-    ScoreCAM,
-    GradCAMPlusPlus,
     AblationCAM,
-    XGradCAM,
     EigenCAM,
     EigenGradCAM,
-    LayerCAM,
     FullGrad,
+    GradCAM,
+    GradCAMPlusPlus,
+    LayerCAM,
+    ScoreCAM,
+    XGradCAM,
 )
-
-from pytorch_grad_cam.utils.image import show_cam_on_image, preprocess_image
 from pytorch_grad_cam.ablation_layer import AblationLayerVit
+from pytorch_grad_cam.utils.image import preprocess_image, show_cam_on_image
 
 methods = {
     "gradcam": GradCAM,
@@ -76,7 +75,7 @@ def reshape_transform(tensor, height=14, width=14):
     features = tensor.size(2)
     # The -1 is for the CLS token
     grid_size = int((patches - 1) ** 0.5)
-    
+
     result = tensor[:, 1:, :].reshape(tensor.size(0), grid_size, grid_size, features)
 
     # Bring the channels to the first dimension,
@@ -97,7 +96,7 @@ if __name__ == "__main__":
 
     # Load base DINOv2 model
     base_model = torch.hub.load("facebookresearch/dinov2", "dinov2_vitb14")
-    
+
     # Create a wrapper model that includes the classifier
     class ModelWithLinear(torch.nn.Module):
         def __init__(self, base_model):
@@ -105,11 +104,11 @@ if __name__ == "__main__":
             self.base_model = base_model
             self.linear = torch.nn.Linear(768, 200)  # 768 -> 200 CUB classes
             self.blocks = base_model.blocks  # Expose blocks for GradCAM
-            
+
         def forward(self, x):
             x = self.base_model(x)
             return self.linear(x)
-    
+
     model = ModelWithLinear(base_model).to(torch.device(args.device)).eval()
 
     target_layers = [model.blocks[-1].norm1]

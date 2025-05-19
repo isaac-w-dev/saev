@@ -1,11 +1,12 @@
 docs: lint
-    rm -rf docs/saev docs/contrib
-    yek saev README.md CONVENTIONS.md > docs/llms.txt || true
-    uv run pdoc3 --force --html --output-dir docs --config latex_math=True saev contrib
+    rm -rf docs/api
+    mkdir -p docs/api
+    yek saev README.md AGENTS.md > docs/api/llms.txt || true
+    uv run pdoc3 --force --html --output-dir docs/api --config latex_math=True saev contrib
 
 test: lint
     uv run pytest --cov saev --cov-report term --cov-report json --json-report --json-report-file pytest.json -n 32 saev || true
-    uv run coverage-badge -o docs/coverage.svg -f
+    uv run coverage-badge -o docs/assets/coverage.svg -f
     uv run scripts/regressions.py
 
 lint: fmt
@@ -17,7 +18,7 @@ fmt:
 
 clean:
     rm -f .coverage
-    rm -f docs/coverage.svg
+    rm -f docs/assets/coverage.svg
     rm -f coverage.json
     rm -f pytest.json
     rm -rf .hypothesis

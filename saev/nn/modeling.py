@@ -26,7 +26,7 @@ class SparseAutoencoder(torch.nn.Module):
     Sparse auto-encoder (SAE) using L1 sparsity penalty.
     """
 
-    def __init__(self, cfg: config.SparseAutoencoder):
+    def __init__(self, cfg: config.Relu):
         super().__init__()
 
         self.cfg = cfg
