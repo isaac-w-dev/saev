@@ -12,4 +12,4 @@ license: mit
 
 ## Inference Instructions
 
-Follow the instructions [here](https://osu-nlp-group.github.io/saev/saev/#inference-instructions).
+Follow the instructions [here](https://osu-nlp-group.github.io/saev/api/saev/#inference-instructions).

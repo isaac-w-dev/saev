@@ -8,7 +8,7 @@ This is the codebase used for our preprint "Sparse Autoencoders for Scientifical
 
 * [arXiv preprint](https://arxiv.org/abs/2502.06755)
 * [Huggingface Models](https://huggingface.co/collections/osunlp/sae-v-67ab8c4fdf179d117db28195)
-* [API Docs](https://osu-nlp-group.github.io/saev/saev)
+* [API Docs](https://osu-nlp-group.github.io/saev/api/saev)
 * [Demos](https://osu-nlp-group.github.io/saev/#demos)
 
 ## About
@@ -18,7 +18,7 @@ It also includes an interactive webapp for looking through a trained SAE's featu
 
 Originally forked from [HugoFry](https://github.com/HugoFry/mats_sae_training_for_ViTs) who forked it from [Joseph Bloom](https://github.com/jbloomAus/SAELens).
 
-Read [logbook.md](logbook.md) for a detailed log of my thought process.
+Read [logbook.md](docs/research/logbook.md) for a detailed log of my thought process.
 
 See [related-work.md](saev/related-work.md) for a list of works training SAEs on vision models.
 Please open an issue or a PR if there is missing work.
@@ -38,7 +38,7 @@ This will create a virtual environment and display the CLI help.
 
 ## Using `saev`
 
-See the [docs](https://osu-nlp-group.github.io/saev/saev) for an overview.
+See the [docs](https://osu-nlp-group.github.io/saev/api/saev) for an overview.
 
 You can ask questions about this repo using the `llms.txt` file.
 
