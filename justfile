@@ -1,8 +1,8 @@
 docs: lint
     rm -rf docs/api
     mkdir -p docs/api
-    yek saev README.md AGENTS.md > docs/api/llms.txt || true
-    uv run pdoc3 --force --html --output-dir docs/api --config latex_math=True saev contrib
+    yek src/saev README.md AGENTS.md > docs/api/llms.txt || true
+    uv run pdoc3 --force --html --output-dir docs/api --config latex_math=True --template-dir src/docs/templates saev
 
 test: lint
     uv run pytest --cov saev --cov-report term --cov-report json --json-report --json-report-file pytest.json -n 32 saev || true

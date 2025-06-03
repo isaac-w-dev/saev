@@ -30,9 +30,6 @@ Homepage = "https://osu-nlp-group.github.io/saev"
 Issues = "https://github.com/OSU-NLP-Group/saev/issues"
 
 [project.optional-dependencies]
-classification = [
-    "scipy>=1.15.1",
-]
 training = [
     "wandb>=0.19.6",
 ]

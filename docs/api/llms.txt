@@ -79,17 +79,7 @@ saev is a Python package for training sparse autoencoders (SAEs) on vision trans
 
 The main entrypoint to the package is in `__main__`; use `python -m saev --help` to see the options and documentation for the script.
 
-# Tutorials
-
 .. include:: ./guide.md
-
-# How-To Guides
-
-.. include:: ./reproduce.md
-
-# Explanations
-
-.. include:: ./related-work.md
 
 .. include:: ./inference.md
 """
@@ -2440,7 +2430,7 @@ uv run python -m saev activations \
 
 This will save activations for the CLIP-pretrained model ViT-B/32, which has a residual stream dimension of 768, and has 49 patches per image (224 / 32 = 7; 7 x 7 = 49).
 It will save the second-to-last layer (`--layer -2`).
-It will write 2.4M patches per shard, and save shards to a new directory `/local/scratch$USER/cache/saev`.
+It will write 2.4M patches per shard, and save shards to a new directory `/local/scratch/$USER/cache/saev`.
 
 
 .. note:: A note on storage space: A ViT-B/16 will save 1.2M images x 197 patches/layer/image x 1 layer = ~240M activations, each of which take up 768 floats x 4 bytes/float = 3072 bytes, for a **total of 723GB** for the entire dataset. As you scale to larger models (ViT-L has 1024 dimensions, 14x14 patches are 224 patches/layer/image), recorded activations will grow even larger.
@@ -4393,72 +4383,6 @@ It can be helpful to think about this project from the perspective of a top mach
 
 
 >>>> py.typed
-
->>>> related-work.md
-# Related Work
-
-Various papers and internet posts on training SAEs for vision.
-
-## Preprints
-
-[An X-Ray Is Worth 15 Features: Sparse Autoencoders for Interpretable Radiology Report Generation](https://arxiv.org/pdf/2410.03334)
-* Haven't read this yet, but Hugo Fry is an author.
-
-## LessWrong
-
-[Towards Multimodal Interpretability: Learning Sparse Interpretable Features in Vision Transformers](https://www.lesswrong.com/posts/bCtbuWraqYTDtuARg/towards-multimodal-interpretability-learning-sparse-2)
-* Trains a sparse autoencoder on the 22nd layer of a CLIP ViT-L/14. First public work training an SAE on a ViT. Finds interesting features, demonstrating that SAEs work with ViTs.
-
-[Interpreting and Steering Features in Images](https://www.lesswrong.com/posts/Quqekpvx8BGMMcaem/interpreting-and-steering-features-in-images)
-* Havne't read it yet.
-
-[Case Study: Interpreting, Manipulating, and Controlling CLIP With Sparse Autoencoders](https://www.lesswrong.com/posts/iYFuZo9BMvr6GgMs5/case-study-interpreting-manipulating-and-controlling-clip)
-* Followup to the above work; haven't read it yet.
-
-[A Suite of Vision Sparse Autoencoders](https://www.lesswrong.com/posts/wrznNDMRmbQABAEMH/a-suite-of-vision-sparse-autoencoders)
-* Train a sparse autoencoder on various layers using the TopK with k=32 on a CLIP ViT-L/14 trained on LAION-2B. The SAE is trained on 1.2B tokens including patch (not just [CLS]). Limited evaluation.
-
->>>> reproduce.md
-# Reproduce
-
-To reproduce our findings from our preprint, you will need to train a couple SAEs on various datasets, then save visual examples so you can browse them in the notebooks.
-
-## Table of Contents
-
-1. Save activations for ImageNet and iNat2021 for DINOv2, CLIP and BioCLIP.
-2. Train SAEs on these activation datasets.
-3. Pick the best SAE checkpoints for each combination.
-4. Save visualizations for those best checkpoints.
-
-## Save Activations
-
-## Train SAEs
-
-## Choose Best Checkpoints
-
-## Save Visualizations
-
-Get visuals for the iNat-trained SAEs (BioCLIP and CLIP):
-
-```sh
-uv run python -m saev visuals \
-  --ckpt checkpoints/$CKPT/sae.pt \
-  --dump-to /$NFS/$USER/saev-visuals/$CKPT/ \
-  --log-freq-range -2.0 -1.0 \
-  --log-value-range -0.75 2.0 \
-  --data.shard-root /local/scratch/$USER/cache/saev/$SHARDS \
-  images:image-folder-dataset \
-  --images.root /$NFS/$USER/datasets/inat21/train_mini/
-```
-
-Look at these visuals in the interactive notebook.
-
-```sh
-uv run marimo edit
-```
-
-Then open [localhost:2718](https://localhost:2718) in your browser and open the `saev/interactive/features.py` file.
-Choose one of the checkpoints in the dropdown and click through the different neurons to find patterns in the underlying ViT.
 
 >>>> test_activations.py
 """
