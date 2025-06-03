@@ -804,7 +804,7 @@ def main(cfg: config.Activations):
 
         executor = submitit.SlurmExecutor(folder=cfg.log_to)
         executor.update_parameters(
-            time=24 * 60,
+            time=int(cfg.n_hours * 60),
             partition=cfg.slurm_partition,
             gpus_per_node=1,
             ntasks_per_node=1,

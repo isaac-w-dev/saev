@@ -117,6 +117,8 @@ class Activations:
     # Hardware
     device: str = "cuda"
     """Which device to use."""
+    n_hours: float = 24.0
+    """Slurm job length."""
     slurm_acct: str = ""
     """Slurm account string."""
     slurm_partition: str = ""
