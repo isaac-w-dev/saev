@@ -11,9 +11,10 @@ import beartype
 import einops
 import numpy as np
 import torch
-import wandb
 from jaxtyping import Float
 from torch import Tensor
+
+import wandb
 
 from . import activations, config, helpers, nn
 
@@ -295,10 +296,9 @@ def evaluate(
     cfgs: list[config.Train], saes: torch.nn.ModuleList, objectives: torch.nn.ModuleList
 ) -> list[EvalMetrics]:
     """
-    Evaluates SAE quality by counting the number of dead features and the number of dense features.
-    Also makes histogram plots to help human qualitative comparison.
+    Evaluates SAE quality by counting dead and dense features and recording loss metrics. Also makes histogram plots to help human qualitative comparison.
 
-    .. todo:: Develop automatic methods to use histogram and feature frequencies to evaluate quality with a single number.
+    The metrics computed are mean ``L0``/``L1``/``MSE`` losses, the number of dead, almost dead, and dense neurons, plus per-feature firing frequencies and mean values.  A list of `EvalMetrics` is returned, one for each SAE.
     """
 
     torch.cuda.empty_cache()

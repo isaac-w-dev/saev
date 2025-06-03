@@ -1,12 +1,12 @@
-# CONTRIBUTING.md
+# CONTRIBUTING
 
-# 1.  Welcome & Scope
+## 1. Welcome & Scope
 
 `saev` is research code.
 PRs that fix bugs, add datasets, or improve docs are welcome.
 Large architectural rewrites: please open a discussion first.”
 
-# 2.  TL;DR
+## 2. TL;DR
 
 Install [uv](https://docs.astral.sh/uv/).
 Clone this repository, then from the root directory:
@@ -19,7 +19,7 @@ You also need [yek](https://github.com/bodo-run/yek) and [lychee](https://github
 
 If you want to do any of the web interface work, you need [elm](https://guide.elm-lang.org/install/elm.html), [elm-format](https://github.com/avh4/elm-format/releases/latest) and [tailwindcss](https://github.com/tailwindlabs/tailwindcss/releases/latest).
 
-# 4.  Repo Layout & Data Dependencies
+## 3. Repo Layout & Data Dependencies
 
 ```
 src/
@@ -27,24 +27,25 @@ src/
     __main__.py  <- entrypoint for entire package.
     config.py    <- All configs, which define the CLI flags.
 
-    activations.py  <-
-    training.py     <-
-    visuals.py      <-
+    activations.py  <- For recording, storing and loading transformer activations.
+    training.py     <- For training sweeps of SAEs on transformer activations.
+    visuals.py      <- For making lots of images
 
     nn/
-      modeling.py    <-
-      objectives.py  <-
+      modeling.py    <- Activations functions for SAEs (JumpReLU, TopK).
+      objectives.py  <- Objective functions for SAEs.
 
   docs/
-    templates/  <-
+    templates/  <- pdoc3 templates
 
   web/
     apps/  <- HTML/CSS and JS (compiled Elm)
     src/   <- Elm source code
 ```
 
-# 5.  Coding Style & Conventions
+## 4. Coding Style & Conventions
 
+* Don't hard-wrap comments. Only use linebreaks for new paragraphs. Let the editor soft wrap content.
 * File descriptors from `open()` are called `fd`.
 * Use types where possible, including `jaxtyping` hints.
 * Decorate functions with `beartype.beartype` unless they use a `jaxtyping` hint, in which case use `jaxtyped(typechecker=beartype.beartype)`.
@@ -66,12 +67,24 @@ The key for these suffixes:
 
 For example, an activation tensor with shape (batch, width, height d_vit) is `acts_BWHD`.
 
-# 6.  Testing & Linting
+## 5. Testing & Linting
 
-# 7.  Commit / PR Checklist
+`justfile` contains commands for testing and linting.
 
-# 8.  Research Reproducibility Notes
+`just lint` will format and lint.
+`just test` will format, lint and test, then report coverage.
 
-# 9.  Asking for Help / Discussion Channels
+To run just one test, run `uv run python -m pytest src/saev -k TESTNAME`.
 
-# 10. Code of Conduct & License Footnotes
+## 6. Commit / PR Checklist
+
+1. Run `just test`.
+2. Check that there are no regressions. Unless you are certain tests are not needed, the coverage % should either stay the same or increase.
+3. Run `just docs`.
+4. Fix any missing doc links.
+
+## 7. Research Reproducibility Notes
+
+## 8. Asking for Help / Discussion Channels
+
+## 9. Code of Conduct & License Footnotes

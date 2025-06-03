@@ -268,7 +268,7 @@ class DataLoad:
     patches: typing.Literal[&#34;cls&#34;, &#34;patches&#34;, &#34;meanpool&#34;] = &#34;patches&#34;
     &#34;&#34;&#34;Which kinds of patches to use. &#39;cls&#39; indicates just the [CLS] token (if any). &#39;patches&#39; indicates it will return all patches. &#39;meanpool&#39; returns the mean of all image patches.&#34;&#34;&#34;
     layer: int | typing.Literal[&#34;all&#34;, &#34;meanpool&#34;] = -2
-    &#34;&#34;&#34;.. todo: document this field.&#34;&#34;&#34;
+    &#34;&#34;&#34;Which ViT layer(s) to read from disk. ``-2`` selects the second-to-last layer. ``&#34;all&#34;`` enumerates every recorded layer, and ``&#34;meanpool&#34;`` averages activations across layers.&#34;&#34;&#34;
     clamp: float = 1e5
     &#34;&#34;&#34;Maximum value for activations; activations will be clamped to within [-clamp, clamp]`.&#34;&#34;&#34;
     n_random_samples: int = 2**19
@@ -286,7 +286,7 @@ class DataLoad:
 </dd>
 <dt id="saev.config.DataLoad.layer"><code class="name">var <span class="ident">layer</span> : Union[int, Literal['all', 'meanpool']]</code></dt>
 <dd>
-<div class="desc"><p>.. todo: document this field.</p></div>
+<div class="desc"><p>Which ViT layer(s) to read from disk. <code>-2</code> selects the second-to-last layer. <code>"all"</code> enumerates every recorded layer, and <code>"meanpool"</code> averages activations across layers.</p></div>
 </dd>
 <dt id="saev.config.DataLoad.n_random_samples"><code class="name">var <span class="ident">n_random_samples</span> : int</code></dt>
 <dd>

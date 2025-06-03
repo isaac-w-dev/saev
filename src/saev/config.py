@@ -139,7 +139,7 @@ class DataLoad:
     patches: typing.Literal["cls", "patches", "meanpool"] = "patches"
     """Which kinds of patches to use. 'cls' indicates just the [CLS] token (if any). 'patches' indicates it will return all patches. 'meanpool' returns the mean of all image patches."""
     layer: int | typing.Literal["all", "meanpool"] = -2
-    """.. todo: document this field."""
+    """Which ViT layer(s) to read from disk. ``-2`` selects the second-to-last layer. ``"all"`` enumerates every recorded layer, and ``"meanpool"`` averages activations across layers."""
     clamp: float = 1e5
     """Maximum value for activations; activations will be clamped to within [-clamp, clamp]`."""
     n_random_samples: int = 2**19

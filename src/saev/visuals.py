@@ -356,9 +356,15 @@ def get_topk_patch(cfg: config.Visuals) -> TopKPatch:
 @beartype.beartype
 @torch.inference_mode()
 def dump_activations(cfg: config.Visuals):
-    """
-    For each SAE latent, we want to know which images have the most total "activation".
-    That is, we keep track of each patch
+    """Dump ViT activation statistics for later use.
+
+    The dataset described by ``cfg`` is processed to find the images or patches that maximally activate each SAE latent.  Various tensors summarising these activations are then written to ``cfg.root`` so they can be loaded by other tools.
+
+    Args:
+        cfg: options controlling which activations are processed and where the resulting files are saved.
+
+    Returns:
+        None. All data is saved to disk.
     """
     if cfg.sort_by == "img":
         topk = get_topk_img(cfg)

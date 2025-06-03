@@ -3,6 +3,7 @@ docs: lint
     mkdir -p docs/api
     -yek src/saev README.md AGENTS.md > docs/api/llms.txt
     uv run pdoc3 --force --html --output-dir docs/api --config latex_math=True --template-dir src/docs/templates saev
+    -lychee docs/api
 
 test: lint
     uv run pytest --cov src/saev --cov-report term --cov-report json --json-report --json-report-file pytest.json -n 32 saev || true
@@ -11,7 +12,6 @@ test: lint
 
 lint: fmt
     uvx ruff check --fix .
-    -lychee .
 
 fmt:
     uvx ruff format --preview .

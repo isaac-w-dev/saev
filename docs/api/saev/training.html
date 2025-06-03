@@ -40,12 +40,9 @@ hljs.highlightAll();
 <span>def <span class="ident">evaluate</span></span>(<span>cfgs: list[<a title="saev.config.Train" href="config.html#saev.config.Train">Train</a>],<br>saes: torch.nn.modules.container.ModuleList,<br>objectives: torch.nn.modules.container.ModuleList) ‑> list[<a title="saev.training.EvalMetrics" href="#saev.training.EvalMetrics">EvalMetrics</a>]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Evaluates SAE quality by counting the number of dead features and the number of dense features.
-Also makes histogram plots to help human qualitative comparison.</p>
-<div class="admonition todo">
-<p class="admonition-title">TODO</p>
-<p>Develop automatic methods to use histogram and feature frequencies to evaluate quality with a single number.</p>
-</div></div>
+<div class="desc"><p>Evaluates SAE quality by counting dead and dense features and recording loss metrics. Also makes histogram plots to help human qualitative comparison.</p>
+<p>The metrics computed are mean <code>L0</code>/<code>L1</code>/<code>MSE</code> losses, the number of dead, almost dead, and dense neurons, plus per-feature firing frequencies and mean values.
+A list of <code><a title="saev.training.EvalMetrics" href="#saev.training.EvalMetrics">EvalMetrics</a></code> is returned, one for each SAE.</p></div>
 </dd>
 <dt id="saev.training.init_b_dec_batched"><code class="name flex">
 <span>def <span class="ident">init_b_dec_batched</span></span>(<span>saes: torch.nn.modules.container.ModuleList,<br>dataset: <a title="saev.activations.Dataset" href="activations.html#saev.activations.Dataset">Dataset</a>)</span>

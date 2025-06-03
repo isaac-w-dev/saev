@@ -414,7 +414,7 @@ INDEX=[
 {
 "ref":"saev.app",
 "url":2,
-"doc":""
+"doc":"Gradio web application for exploring SAE latent activations. This subpackage defines a small interface built with :mod: gradio to inspect sparse autoencoder features. Run  python -m saev.app to start the demo."
 },
 {
 "ref":"saev.app.data",
@@ -504,7 +504,7 @@ INDEX=[
 {
 "ref":"saev.colors",
 "url":5,
-"doc":""
+"doc":"Utility color palettes used across saev visualizations."
 },
 {
 "ref":"saev.config",
@@ -674,7 +674,7 @@ INDEX=[
 {
 "ref":"saev.config.DataLoad.layer",
 "url":6,
-"doc":" todo: document this field."
+"doc":"Which ViT layer(s) to read from disk.  -2 selects the second-to-last layer.  \"all\" enumerates every recorded layer, and  \"meanpool\" averages activations across layers."
 },
 {
 "ref":"saev.config.DataLoad.n_random_samples",
@@ -1620,7 +1620,7 @@ INDEX=[
 {
 "ref":"saev.training.evaluate",
 "url":21,
-"doc":"Evaluates SAE quality by counting the number of dead features and the number of dense features. Also makes histogram plots to help human qualitative comparison.  todo Develop automatic methods to use histogram and feature frequencies to evaluate quality with a single number.",
+"doc":"Evaluates SAE quality by counting dead and dense features and recording loss metrics. Also makes histogram plots to help human qualitative comparison. The metrics computed are mean  L0 / L1 / MSE losses, the number of dead, almost dead, and dense neurons, plus per-feature firing frequencies and mean values. A list of  EvalMetrics is returned, one for each SAE.",
 "func":1
 },
 {
@@ -1808,7 +1808,7 @@ INDEX=[
 {
 "ref":"saev.visuals.dump_activations",
 "url":22,
-"doc":"For each SAE latent, we want to know which images have the most total \"activation\". That is, we keep track of each patch",
+"doc":"Dump ViT activation statistics for later use. The dataset described by  cfg is processed to find the images or patches that maximally activate each SAE latent. Various tensors summarising these activations are then written to  cfg.root so they can be loaded by other tools. Args: cfg: options controlling which activations are processed and where the resulting files are saved. Returns: None. All data is saved to disk.",
 "func":1
 },
 {
