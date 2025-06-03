@@ -28,7 +28,7 @@ Please open an issue or a PR if there is missing work.
 Installation is supported with [uv](https://docs.astral.sh/uv/).
 saev will likely work with pure pip, conda, etc. but I will not formally support it.
 
-Clone this repository (or fork it), then from the root directory:
+Clone this repository, then from the root directory:
 
 ```bash
 uv run python -m saev --help

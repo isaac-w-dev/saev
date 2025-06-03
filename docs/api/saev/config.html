@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-<meta name="generator" content="pdoc3 0.11.3">
+<meta name="generator" content="pdoc3 0.11.1">
 <title>saev.config API documentation</title>
 <meta name="description" content="All configs for all saev jobs …">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
@@ -43,7 +43,7 @@ Might be expanded in the future to support pseudo-random sampling from distribut
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="saev.config.expand"><code class="name flex">
-<span>def <span class="ident">expand</span></span>(<span>config: dict[str, object]) ‑> Iterator[dict[str, object]]</span>
+<span>def <span class="ident">expand</span></span>(<span>config: dict[str, object]) ‑> collections.abc.Iterator[dict[str, object]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Expands dicts with (nested) lists into a list of (nested) dicts.</p></div>
@@ -61,7 +61,7 @@ Might be expanded in the future to support pseudo-random sampling from distribut
 <dl>
 <dt id="saev.config.Activations"><code class="flex name class">
 <span>class <span class="ident">Activations</span></span>
-<span>(</span><span>data: <a title="saev.config.ImagenetDataset" href="#saev.config.ImagenetDataset">ImagenetDataset</a> | <a title="saev.config.ImageFolderDataset" href="#saev.config.ImageFolderDataset">ImageFolderDataset</a> | <a title="saev.config.Ade20kDataset" href="#saev.config.Ade20kDataset">Ade20kDataset</a> = &lt;factory&gt;,<br>dump_to: str = './shards',<br>vit_family: Literal['clip', 'siglip', 'dinov2'] = 'clip',<br>vit_ckpt: str = 'ViT-L-14/openai',<br>vit_batch_size: int = 1024,<br>n_workers: int = 8,<br>d_vit: int = 1024,<br>vit_layers: list[int] = &lt;factory&gt;,<br>n_patches_per_img: int = 256,<br>cls_token: bool = True,<br>n_patches_per_shard: int = 2400000,<br>seed: int = 42,<br>ssl: bool = True,<br>device: str = 'cuda',<br>slurm: bool = False,<br>slurm_acct: str = 'PAS2136',<br>log_to: str = './logs')</span>
+<span>(</span><span>data: <a title="saev.config.ImagenetDataset" href="#saev.config.ImagenetDataset">ImagenetDataset</a> | <a title="saev.config.ImageFolderDataset" href="#saev.config.ImageFolderDataset">ImageFolderDataset</a> | <a title="saev.config.Ade20kDataset" href="#saev.config.Ade20kDataset">Ade20kDataset</a> = &lt;factory&gt;,<br>dump_to: str = './shards',<br>vit_family: Literal['clip', 'siglip', 'dinov2'] = 'clip',<br>vit_ckpt: str = 'ViT-L-14/openai',<br>vit_batch_size: int = 1024,<br>n_workers: int = 8,<br>d_vit: int = 1024,<br>vit_layers: list[int] = &lt;factory&gt;,<br>n_patches_per_img: int = 256,<br>cls_token: bool = True,<br>n_patches_per_shard: int = 2400000,<br>seed: int = 42,<br>ssl: bool = True,<br>device: str = 'cuda',<br>n_hours: float = 24.0,<br>slurm_acct: str = '',<br>slurm_partition: str = '',<br>log_to: str = './logs')</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Configuration for calculating and saving ViT activations.</p></div>
@@ -107,10 +107,12 @@ class Activations:
     # Hardware
     device: str = &#34;cuda&#34;
     &#34;&#34;&#34;Which device to use.&#34;&#34;&#34;
-    slurm: bool = False
-    &#34;&#34;&#34;Whether to use `submitit` to run jobs on a Slurm cluster.&#34;&#34;&#34;
-    slurm_acct: str = &#34;PAS2136&#34;
+    n_hours: float = 24.0
+    &#34;&#34;&#34;Slurm job length.&#34;&#34;&#34;
+    slurm_acct: str = &#34;&#34;
     &#34;&#34;&#34;Slurm account string.&#34;&#34;&#34;
+    slurm_partition: str = &#34;&#34;
+    &#34;&#34;&#34;Slurm partition.&#34;&#34;&#34;
     log_to: str = &#34;./logs&#34;
     &#34;&#34;&#34;Where to log Slurm job stdout/stderr.&#34;&#34;&#34;</code></pre>
 </details>
@@ -140,6 +142,10 @@ class Activations:
 <dd>
 <div class="desc"><p>Where to log Slurm job stdout/stderr.</p></div>
 </dd>
+<dt id="saev.config.Activations.n_hours"><code class="name">var <span class="ident">n_hours</span> : float</code></dt>
+<dd>
+<div class="desc"><p>Slurm job length.</p></div>
+</dd>
 <dt id="saev.config.Activations.n_patches_per_img"><code class="name">var <span class="ident">n_patches_per_img</span> : int</code></dt>
 <dd>
 <div class="desc"><p>Number of ViT patches per image (depends on model).</p></div>
@@ -156,13 +162,13 @@ class Activations:
 <dd>
 <div class="desc"><p>Random seed.</p></div>
 </dd>
-<dt id="saev.config.Activations.slurm"><code class="name">var <span class="ident">slurm</span> : bool</code></dt>
-<dd>
-<div class="desc"><p>Whether to use <code>submitit</code> to run jobs on a Slurm cluster.</p></div>
-</dd>
 <dt id="saev.config.Activations.slurm_acct"><code class="name">var <span class="ident">slurm_acct</span> : str</code></dt>
 <dd>
 <div class="desc"><p>Slurm account string.</p></div>
+</dd>
+<dt id="saev.config.Activations.slurm_partition"><code class="name">var <span class="ident">slurm_partition</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Slurm partition.</p></div>
 </dd>
 <dt id="saev.config.Activations.ssl"><code class="name">var <span class="ident">ssl</span> : bool</code></dt>
 <dd>
@@ -242,7 +248,7 @@ def n_imgs(self) -&gt; int:
 </dd>
 <dt id="saev.config.DataLoad"><code class="flex name class">
 <span>class <span class="ident">DataLoad</span></span>
-<span>(</span><span>shard_root: str = './shards',<br>patches: Literal['cls', 'patches', 'meanpool'] = 'patches',<br>layer: int | Literal['all', 'meanpool'] = -2,<br>clamp: float = 100000.0,<br>n_random_samples: int = 524288,<br>scale_mean: bool | str = True,<br>scale_norm: bool | str = True)</span>
+<span>(</span><span>shard_root: str = './shards',<br>patches: Literal['cls', 'patches', 'meanpool'] = 'patches',<br>layer: Union[int, Literal['all', 'meanpool']] = -2,<br>clamp: float = 100000.0,<br>n_random_samples: int = 524288,<br>scale_mean: bool | str = True,<br>scale_norm: bool | str = True)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Configuration for loading activation data from disk.</p></div>
@@ -278,7 +284,7 @@ class DataLoad:
 <dd>
 <div class="desc"><p>Maximum value for activations; activations will be clamped to within [-clamp, clamp]`.</p></div>
 </dd>
-<dt id="saev.config.DataLoad.layer"><code class="name">var <span class="ident">layer</span> : int | Literal['all', 'meanpool']</code></dt>
+<dt id="saev.config.DataLoad.layer"><code class="name">var <span class="ident">layer</span> : Union[int, Literal['all', 'meanpool']]</code></dt>
 <dd>
 <div class="desc"><p>.. todo: document this field.</p></div>
 </dd>
@@ -1028,12 +1034,13 @@ setTimeout(() => input.focus(), 100);
 <li><code><a title="saev.config.Activations.device" href="#saev.config.Activations.device">device</a></code></li>
 <li><code><a title="saev.config.Activations.dump_to" href="#saev.config.Activations.dump_to">dump_to</a></code></li>
 <li><code><a title="saev.config.Activations.log_to" href="#saev.config.Activations.log_to">log_to</a></code></li>
+<li><code><a title="saev.config.Activations.n_hours" href="#saev.config.Activations.n_hours">n_hours</a></code></li>
 <li><code><a title="saev.config.Activations.n_patches_per_img" href="#saev.config.Activations.n_patches_per_img">n_patches_per_img</a></code></li>
 <li><code><a title="saev.config.Activations.n_patches_per_shard" href="#saev.config.Activations.n_patches_per_shard">n_patches_per_shard</a></code></li>
 <li><code><a title="saev.config.Activations.n_workers" href="#saev.config.Activations.n_workers">n_workers</a></code></li>
 <li><code><a title="saev.config.Activations.seed" href="#saev.config.Activations.seed">seed</a></code></li>
-<li><code><a title="saev.config.Activations.slurm" href="#saev.config.Activations.slurm">slurm</a></code></li>
 <li><code><a title="saev.config.Activations.slurm_acct" href="#saev.config.Activations.slurm_acct">slurm_acct</a></code></li>
+<li><code><a title="saev.config.Activations.slurm_partition" href="#saev.config.Activations.slurm_partition">slurm_partition</a></code></li>
 <li><code><a title="saev.config.Activations.ssl" href="#saev.config.Activations.ssl">ssl</a></code></li>
 <li><code><a title="saev.config.Activations.vit_batch_size" href="#saev.config.Activations.vit_batch_size">vit_batch_size</a></code></li>
 <li><code><a title="saev.config.Activations.vit_ckpt" href="#saev.config.Activations.vit_ckpt">vit_ckpt</a></code></li>
@@ -1164,7 +1171,7 @@ setTimeout(() => input.focus(), 100);
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.3</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.1</a>.</p>
 </footer>
 </body>
 </html>
