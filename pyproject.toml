@@ -21,6 +21,10 @@ dependencies = [
     "tyro>=0.8.12",
 ]
 
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
 [project.urls]
 Homepage = "https://osu-nlp-group.github.io/saev"
 Issues = "https://github.com/OSU-NLP-Group/saev/issues"
@@ -32,9 +36,6 @@ classification = [
 training = [
     "wandb>=0.19.6",
 ]
-
-[tool.setuptools]
-packages = ["saev"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I"]
