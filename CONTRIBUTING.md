@@ -4,7 +4,7 @@
 
 `saev` is research code.
 PRs that fix bugs, add datasets, or improve docs are welcome.
-Large architectural rewrites: please open a discussion first.”
+Large architectural rewrites: please open a discussion first.
 
 ## 2. TL;DR
 
