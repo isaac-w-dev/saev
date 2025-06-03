@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-<meta name="generator" content="pdoc3 0.11.1">
+<meta name="generator" content="pdoc3 0.11.3">
 <title>saev.activations API documentation</title>
 <meta name="description" content="To save lots of activations, we want to do things in parallel, with lots of slurm jobs, and save multiple files, rather than just one …">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
-<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}#lunr-search{width:100%;font-size:1em;padding:6px 9px 5px 9px;border:1px solid silver}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
 <style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], processEscapes: true } });</script>
@@ -57,7 +57,7 @@ Also saves a metadata.json file to that directory for human reference.</p>
 <p>Directory to where activations should be dumped/loaded from.</p></div>
 </dd>
 <dt id="saev.activations.get_dataloader"><code class="name flex">
-<span>def <span class="ident">get_dataloader</span></span>(<span>cfg: <a title="saev.config.Activations" href="config.html#saev.config.Activations">Activations</a>, *, img_transform=None)</span>
+<span>def <span class="ident">get_dataloader</span></span>(<span>cfg: <a title="saev.config.Activations" href="config.html#saev.config.Activations">Activations</a>,<br>*,<br>img_transform=None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Gets the dataloader for the current experiment; delegates dataloader construction to dataset-specific functions.</p>
@@ -72,7 +72,7 @@ Also saves a metadata.json file to that directory for human reference.</p>
 <p>A PyTorch Dataloader that yields dictionaries with <code>'image'</code> keys containing image batches.</p></div>
 </dd>
 <dt id="saev.activations.get_dataset"><code class="name flex">
-<span>def <span class="ident">get_dataset</span></span>(<span>cfg: <a title="saev.config.ImagenetDataset" href="config.html#saev.config.ImagenetDataset">ImagenetDataset</a> | <a title="saev.config.ImageFolderDataset" href="config.html#saev.config.ImageFolderDataset">ImageFolderDataset</a> | <a title="saev.config.Ade20kDataset" href="config.html#saev.config.Ade20kDataset">Ade20kDataset</a>, *, img_transform)</span>
+<span>def <span class="ident">get_dataset</span></span>(<span>cfg: <a title="saev.config.ImagenetDataset" href="config.html#saev.config.ImagenetDataset">ImagenetDataset</a> | <a title="saev.config.ImageFolderDataset" href="config.html#saev.config.ImageFolderDataset">ImageFolderDataset</a> | <a title="saev.config.Ade20kDataset" href="config.html#saev.config.Ade20kDataset">Ade20kDataset</a>,<br>*,<br>img_transform)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Gets the dataset for the current experiment; delegates construction to dataset-specific functions.</p>
@@ -87,7 +87,7 @@ Also saves a metadata.json file to that directory for human reference.</p>
 <p>A dataset that has dictionaries with <code>'image'</code>, <code>'index'</code>, <code>'target'</code>, and <code>'label'</code> keys containing examples.</p></div>
 </dd>
 <dt id="saev.activations.get_default_dataloader"><code class="name flex">
-<span>def <span class="ident">get_default_dataloader</span></span>(<span>cfg: <a title="saev.config.Activations" href="config.html#saev.config.Activations">Activations</a>, *, img_transform: collections.abc.Callable) ‑> torch.utils.data.dataloader.DataLoader</span>
+<span>def <span class="ident">get_default_dataloader</span></span>(<span>cfg: <a title="saev.config.Activations" href="config.html#saev.config.Activations">Activations</a>,<br>*,<br>img_transform: <class 'collections.abc.Callable'>) ‑> torch.utils.data.dataloader.DataLoader</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Get a dataloader for a default map-style dataset.</p>
@@ -112,7 +112,7 @@ Also saves a metadata.json file to that directory for human reference.</p>
 </dl></div>
 </dd>
 <dt id="saev.activations.make_img_transform"><code class="name flex">
-<span>def <span class="ident">make_img_transform</span></span>(<span>vit_family: str, vit_ckpt: str) ‑> collections.abc.Callable</span>
+<span>def <span class="ident">make_img_transform</span></span>(<span>vit_family: str, vit_ckpt: str) ‑> <class 'collections.abc.Callable'></span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -164,7 +164,7 @@ Also saves a metadata.json file to that directory for human reference.</p>
 <dl>
 <dt id="saev.activations.Ade20k"><code class="flex name class">
 <span>class <span class="ident">Ade20k</span></span>
-<span>(</span><span>cfg: <a title="saev.config.Ade20kDataset" href="config.html#saev.config.Ade20kDataset">Ade20kDataset</a>, *, img_transform: collections.abc.Callable | None = None, seg_transform: collections.abc.Callable | None = &lt;function Ade20k.&lt;lambda&gt;&gt;)</span>
+<span>(</span><span>cfg: <a title="saev.config.Ade20kDataset" href="config.html#saev.config.Ade20kDataset">Ade20kDataset</a>,<br>*,<br>img_transform: collections.abc.Callable | None = None,<br>seg_transform: collections.abc.Callable | None = &lt;function Ade20k.&lt;lambda&gt;&gt;)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>An abstract class representing a :class:<code><a title="saev.activations.Dataset" href="#saev.activations.Dataset">Dataset</a></code>.</p>
@@ -401,7 +401,7 @@ registered hooks while the latter silently ignores them.</p>
 </div></div>
 </dd>
 <dt id="saev.activations.Clip.get_patches"><code class="name flex">
-<span>def <span class="ident">get_patches</span></span>(<span>self, cfg: <a title="saev.config.Activations" href="config.html#saev.config.Activations">Activations</a>) ‑> slice</span>
+<span>def <span class="ident">get_patches</span></span>(<span>self,<br>cfg: <a title="saev.config.Activations" href="config.html#saev.config.Activations">Activations</a>) ‑> slice</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -833,7 +833,7 @@ registered hooks while the latter silently ignores them.</p>
 </dd>
 <dt id="saev.activations.ImageFolder"><code class="flex name class">
 <span>class <span class="ident">ImageFolder</span></span>
-<span>(</span><span>root: Union[str, pathlib.Path], transform: Optional[Callable] = None, target_transform: Optional[Callable] = None, loader: Callable[[str], Any] = &lt;function default_loader&gt;, is_valid_file: Optional[Callable[[str], bool]] = None, allow_empty: bool = False)</span>
+<span>(</span><span>root: str | pathlib.Path,<br>transform: Callable | None = None,<br>target_transform: Callable | None = None,<br>loader: Callable[[str], Any] = &lt;function default_loader&gt;,<br>is_valid_file: Callable[[str], bool] | None = None,<br>allow_empty: bool = False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>A generic data loader where the images are arranged in this way by default: ::</p>
@@ -907,7 +907,7 @@ class ImageFolder(torchvision.datasets.ImageFolder):
 </dd>
 <dt id="saev.activations.Imagenet"><code class="flex name class">
 <span>class <span class="ident">Imagenet</span></span>
-<span>(</span><span>cfg: <a title="saev.config.ImagenetDataset" href="config.html#saev.config.ImagenetDataset">ImagenetDataset</a>, *, img_transform=None)</span>
+<span>(</span><span>cfg: <a title="saev.config.ImagenetDataset" href="config.html#saev.config.ImagenetDataset">ImagenetDataset</a>,<br>*,<br>img_transform=None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>An abstract class representing a :class:<code><a title="saev.activations.Dataset" href="#saev.activations.Dataset">Dataset</a></code>.</p>
@@ -966,7 +966,7 @@ class Imagenet(torch.utils.data.Dataset):
 </dd>
 <dt id="saev.activations.Metadata"><code class="flex name class">
 <span>class <span class="ident">Metadata</span></span>
-<span>(</span><span>vit_family: str, vit_ckpt: str, layers: tuple[int, ...], n_patches_per_img: int, cls_token: bool, d_vit: int, seed: int, n_imgs: int, n_patches_per_shard: int, data: str)</span>
+<span>(</span><span>vit_family: str,<br>vit_ckpt: str,<br>layers: tuple[int, ...],<br>n_patches_per_img: int,<br>cls_token: bool,<br>d_vit: int,<br>seed: int,<br>n_imgs: int,<br>n_patches_per_shard: int,<br>data: str)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Metadata(vit_family: str, vit_ckpt: str, layers: tuple[int, &hellip;], n_patches_per_img: int, cls_token: bool, d_vit: int, seed: int, n_imgs: int, n_patches_per_shard: int, data: str)</p></div>
@@ -1065,7 +1065,7 @@ class Metadata:
 <h3>Static methods</h3>
 <dl>
 <dt id="saev.activations.Metadata.from_cfg"><code class="name flex">
-<span>def <span class="ident">from_cfg</span></span>(<span>cls, cfg: <a title="saev.config.Activations" href="config.html#saev.config.Activations">Activations</a>) ‑> <a title="saev.activations.Metadata" href="#saev.activations.Metadata">Metadata</a></span>
+<span>def <span class="ident">from_cfg</span></span>(<span>cls,<br>cfg: <a title="saev.config.Activations" href="config.html#saev.config.Activations">Activations</a>) ‑> <a title="saev.activations.Metadata" href="#saev.activations.Metadata">Metadata</a></span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -1105,7 +1105,7 @@ def hash(self) -&gt; str:
 </dd>
 <dt id="saev.activations.RecordedVisionTransformer"><code class="flex name class">
 <span>class <span class="ident">RecordedVisionTransformer</span></span>
-<span>(</span><span>vit: torch.nn.modules.module.Module, n_patches_per_img: int, cls_token: bool, layers: list[int])</span>
+<span>(</span><span>vit: torch.nn.modules.module.Module,<br>n_patches_per_img: int,<br>cls_token: bool,<br>layers: list[int])</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Base class for all neural network modules.</p>
@@ -1499,7 +1499,7 @@ registered hooks while the latter silently ignores them.</p>
 </div></div>
 </dd>
 <dt id="saev.activations.Siglip.get_patches"><code class="name flex">
-<span>def <span class="ident">get_patches</span></span>(<span>self, cfg: <a title="saev.config.Activations" href="config.html#saev.config.Activations">Activations</a>) ‑> slice</span>
+<span>def <span class="ident">get_patches</span></span>(<span>self,<br>cfg: <a title="saev.config.Activations" href="config.html#saev.config.Activations">Activations</a>) ‑> slice</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -1516,6 +1516,52 @@ registered hooks while the latter silently ignores them.</p>
 </section>
 </article>
 <nav id="sidebar">
+<form>
+<input id="lunr-search" name="q" placeholder="🔎 Search ..." aria-label="Search"
+disabled minlength="2">
+</form>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.16.0/tingle.min.css" integrity="sha512-b+T2i3P45i1LZM7I00Ci5QquB9szqaxu+uuk5TUSGjZQ4w4n+qujQiIuvTv2BxE7WCGQCifNMksyKILDiHzsOg==" crossorigin>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.16.0/tingle.min.js" integrity="sha512-2B9/byNV1KKRm5nQ2RLViPFD6U4dUjDGwuW1GU+ImJh8YinPU9Zlq1GzdTMO+G2ROrB5o1qasJBy1ttYz0wCug==" crossorigin></script>
+<style>
+.modal-dialog iframe {
+width: 100vw;
+height: calc(100vh - 80px);
+}
+@media screen and (min-width: 700px) {
+.modal-dialog iframe {
+width: 70vw;
+height: 80vh;
+}
+}
+.modal-dialog .tingle-modal-box {width: auto;}
+.modal-dialog .tingle-modal-box__content {padding: 0;}
+</style>
+<script>
+const input = document.getElementById('lunr-search');
+input.disabled = false;
+input.form.addEventListener('submit', (ev) => {
+ev.preventDefault();
+const url = new URL(window.location);
+url.searchParams.set('q', input.value);
+history.replaceState({}, null, url.toString());
+search(input.value);
+});
+const query = new URL(window.location).searchParams.get('q');
+if (query)
+search(query);
+function search(query) {
+const url = '../doc-search.html#' + encodeURIComponent(query);
+new tingle.modal({
+cssClass: ['modal-dialog'],
+onClose: () => {
+const url = new URL(window.location);
+url.searchParams.delete('q');
+history.replaceState({}, null, url.toString());
+setTimeout(() => input.focus(), 100);
+}
+}).setContent('<iframe src="' + url + '"></iframe>').open();
+}
+</script>
 <div class="toc">
 <ul></ul>
 </div>
@@ -1642,7 +1688,7 @@ registered hooks while the latter silently ignores them.</p>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.3</a>.</p>
 </footer>
 </body>
 </html>
