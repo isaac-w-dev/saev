@@ -179,6 +179,8 @@ class Siglip(torch.nn.Module):
 
         assert isinstance(self.model, open_clip.timm_model.TimmModel)
 
+        self.name = f"siglip/{vit_ckpt}"
+
     def get_residuals(self) -> list[torch.nn.Module]:
         return self.model.trunk.blocks
 
@@ -222,37 +224,6 @@ class DinoV2(torch.nn.Module):
         return features
 
 
-@jaxtyped(typechecker=beartype.beartype)
-class Moondream2(torch.nn.Module):
-    """
-    Moondream2 has 14x14 pixel patches. For a 378x378 image (as we use here), this is 27x27 patches for a total of 729, with no [CLS] token.
-    """
-
-    def __init__(self, vit_ckpt: str):
-        super().__init__()
-
-        import transformers
-
-        vit_id, revision = vit_ckpt.split(":")
-
-        mllm = transformers.AutoModelForCausalLM.from_pretrained(
-            vit_id, revision=revision, trust_remote_code=True
-        )
-        self.model = mllm.vision_encoder.encoder.model.visual
-
-    def get_patches(self, cfg: config.Activations) -> slice:
-        return slice(None, None, None)
-
-    def get_residuals(self) -> list[torch.nn.Module]:
-        return self.model.blocks
-
-    def forward(
-        self, batch: Float[Tensor, "batch 3 width height"]
-    ) -> Float[Tensor, "batch patches dim"]:
-        features = self.model(batch)
-        return features
-
-
 @beartype.beartype
 def make_vit(vit_family: str, vit_ckpt: str):
     if vit_family == "clip":
@@ -261,8 +232,6 @@ def make_vit(vit_family: str, vit_ckpt: str):
         return Siglip(vit_ckpt)
     elif vit_family == "dinov2":
         return DinoV2(vit_ckpt)
-    elif vit_family == "moondream2":
-        return Moondream2(vit_ckpt)
     else:
         typing.assert_never(vit_family)
 
@@ -287,24 +256,13 @@ def make_img_transform(vit_family: str, vit_ckpt: str) -> Callable:
         from torchvision.transforms import v2
 
         return v2.Compose([
-            # TODO: I bet this should be 256, 256, which is causing localization issues in non-square images.
-            v2.Resize(size=256),
+            v2.Resize(size=(256, 256)),
             v2.CenterCrop(size=(224, 224)),
             v2.ToImage(),
             v2.ToDtype(torch.float32, scale=True),
             v2.Normalize(mean=[0.4850, 0.4560, 0.4060], std=[0.2290, 0.2240, 0.2250]),
         ])
 
-    elif vit_family == "moondream2":
-        from torchvision.transforms import v2
-
-        # Assume fixed image ratio, 378x378
-        return v2.Compose([
-            v2.Resize(size=(378, 378), interpolation=v2.InterpolationMode.BICUBIC),
-            v2.ToImage(),
-            v2.ToDtype(torch.float32, scale=True),
-            v2.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
-        ])
     else:
         typing.assert_never(vit_family)
 
@@ -849,6 +807,7 @@ def main(cfg: config.Activations):
             time=24 * 60,
             partition="gpu",
             gpus_per_node=1,
+            ntasks_per_node=1,
             cpus_per_task=cfg.n_workers + 4,
             stderr_to_stdout=True,
             account=cfg.slurm_acct,
