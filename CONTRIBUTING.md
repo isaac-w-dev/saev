@@ -46,6 +46,7 @@ src/
 ## 4. Coding Style & Conventions
 
 * Don't hard-wrap comments. Only use linebreaks for new paragraphs. Let the editor soft wrap content.
+* Use single-backticks for variables. We use Markdown and [pdoc3](https://pdoc3.github.io/pdoc/) for docs rather than ReST and Sphinx.
 * File descriptors from `open()` are called `fd`.
 * Use types where possible, including `jaxtyping` hints.
 * Decorate functions with `beartype.beartype` unless they use a `jaxtyping` hint, in which case use `jaxtyped(typechecker=beartype.beartype)`.
@@ -85,6 +86,14 @@ To run just one test, run `uv run python -m pytest src/saev -k TESTNAME`.
 
 ## 7. Research Reproducibility Notes
 
-## 8. Asking for Help / Discussion Channels
+If you add a new neural network or other hard-to-unit-test bit of code, it should either be a trivial change or it should come with an experiment demonstrating that it works.
 
-## 9. Code of Conduct & License Footnotes
+This means some links to WandB, or a small report in markdown in the repo itself.
+For example, if you wanted to add a new activation function from a recent paper, you should train a small sweep using the current baseline, demonstrate some qualitative or quantitative results, and then run the same sweep with your minimal change, and demonstrate some improvement (speed, quality, loss, etc).
+Document this in a markdown report (in `src/saev/nn` for a new activation function) and include it in the docs.
+
+Neural networks are hard. It's okay.
+
+## 8. Code of Conduct & License Footnotes
+
+Be polite, kind and assume good intent.
