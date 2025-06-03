@@ -799,13 +799,13 @@ def main(cfg: config.Activations):
     setup(cfg)
 
     # Actually record activations.
-    if cfg.slurm:
+    if cfg.slurm_acct:
         import submitit
 
         executor = submitit.SlurmExecutor(folder=cfg.log_to)
         executor.update_parameters(
             time=24 * 60,
-            partition="gpu",
+            partition=cfg.slurm_partition,
             gpus_per_node=1,
             ntasks_per_node=1,
             cpus_per_task=cfg.n_workers + 4,

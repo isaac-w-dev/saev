@@ -519,8 +519,8 @@ def get_latent_lookup(
         f1_TS = (2 * tp_TS) / (2 * tp_TS + fp_TS + fn_TS + 1e-10)
 
         # Calculate precision and recall for each threshold
-        precision_TS = tp_TS / (tp_TS + fp_TS + 1e-10)  # TP / (TP + FP)
-        recall_TS = tp_TS / (tp_TS + fn_TS + 1e-10)     # TP / (TP + FN)
+        # precision_TS = tp_TS / (tp_TS + fp_TS + 1e-10)  # TP / (TP + FP)
+        # recall_TS = tp_TS / (tp_TS + fn_TS + 1e-10)  # TP / (TP + FN)
 
         f1_S, best_thresh_i_S = f1_TS.max(dim=0)
         f1_S = torch.where(mask_S, f1_S, torch.tensor(-1.0, device=f1_S.device))

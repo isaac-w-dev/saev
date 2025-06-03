@@ -117,10 +117,10 @@ class Activations:
     # Hardware
     device: str = "cuda"
     """Which device to use."""
-    slurm: bool = False
-    """Whether to use `submitit` to run jobs on a Slurm cluster."""
-    slurm_acct: str = "PAS2136"
+    slurm_acct: str = ""
     """Slurm account string."""
+    slurm_partition: str = ""
+    """Slurm partition."""
     log_to: str = "./logs"
     """Where to log Slurm job stdout/stderr."""
 

@@ -10,11 +10,12 @@ test: lint
     uv run scripts/regressions.py
 
 lint: fmt
-    uv run ruff check --fix .
+    uvx ruff check --fix .
+    # lychee .
 
 fmt:
-    uv run ruff format --preview .
-    fd -e elm | xargs elm-format --yes
+    uvx ruff format --preview .
+    -fd -e elm | xargs elm-format --yes
 
 clean:
     rm -f .coverage
