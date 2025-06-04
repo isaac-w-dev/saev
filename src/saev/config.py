@@ -344,6 +344,11 @@ def grid(cfg: Train, sweep_dct: dict[str, object]) -> tuple[list[Train], list[st
             sae_dct["seed"] = sae_dct.pop("seed", cfg.sae.seed) + cfg.seed + d
             dct["sae"] = dataclasses.replace(cfg.sae, **sae_dct)
 
+        # .objective is a nested field that cannot be naively expanded.
+        objective_dct = dct.pop("objective")
+        if objective_dct:
+            dct["objective"] = dataclasses.replace(cfg.objective, **objective_dct)
+
         # .data is a nested field that cannot be naively expanded.
         data_dct = dct.pop("data")
         if data_dct:
