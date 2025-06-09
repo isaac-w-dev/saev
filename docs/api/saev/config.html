@@ -539,7 +539,7 @@ def d_sae(self) -&gt; int:
 </dd>
 <dt id="saev.config.Train"><code class="flex name class">
 <span>class <span class="ident">Train</span></span>
-<span>(</span><span>data: <a title="saev.config.DataLoad" href="#saev.config.DataLoad">DataLoad</a> = &lt;factory&gt;,<br>n_workers: int = 32,<br>n_patches: int = 100000000,<br>sae: <a title="saev.config.Relu" href="#saev.config.Relu">Relu</a> | <a title="saev.config.JumpRelu" href="#saev.config.JumpRelu">JumpRelu</a> = &lt;factory&gt;,<br>objective: <a title="saev.config.Vanilla" href="#saev.config.Vanilla">Vanilla</a> | <a title="saev.config.Matryoshka" href="#saev.config.Matryoshka">Matryoshka</a> = &lt;factory&gt;,<br>n_sparsity_warmup: int = 0,<br>lr: float = 0.0004,<br>n_lr_warmup: int = 500,<br>sae_batch_size: int = 16384,<br>track: bool = True,<br>wandb_project: str = 'saev',<br>tag: str = '',<br>log_every: int = 25,<br>ckpt_path: str = './checkpoints',<br>device: Literal['cuda', 'cpu'] = 'cuda',<br>seed: int = 42,<br>slurm: bool = False,<br>slurm_acct: str = 'PAS2136',<br>log_to: str = './logs')</span>
+<span>(</span><span>data: <a title="saev.config.DataLoad" href="#saev.config.DataLoad">DataLoad</a> = &lt;factory&gt;,<br>n_workers: int = 32,<br>n_patches: int = 100000000,<br>sae: <a title="saev.config.Relu" href="#saev.config.Relu">Relu</a> | <a title="saev.config.JumpRelu" href="#saev.config.JumpRelu">JumpRelu</a> = &lt;factory&gt;,<br>objective: <a title="saev.config.Vanilla" href="#saev.config.Vanilla">Vanilla</a> | <a title="saev.config.Matryoshka" href="#saev.config.Matryoshka">Matryoshka</a> = &lt;factory&gt;,<br>n_sparsity_warmup: int = 0,<br>lr: float = 0.0004,<br>n_lr_warmup: int = 500,<br>sae_batch_size: int = 16384,<br>track: bool = True,<br>wandb_project: str = 'saev',<br>tag: str = '',<br>log_every: int = 25,<br>ckpt_path: str = './checkpoints',<br>device: Literal['cuda', 'cpu'] = 'cuda',<br>seed: int = 42,<br>slurm_acct: str = '',<br>slurm_partition: str = '',<br>n_hours: float = 24.0,<br>log_to: str = './logs')</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Configuration for training a sparse autoencoder on a vision transformer.</p></div>
@@ -589,10 +589,12 @@ class Train:
     &#34;&#34;&#34;Hardware device.&#34;&#34;&#34;
     seed: int = 42
     &#34;&#34;&#34;Random seed.&#34;&#34;&#34;
-    slurm: bool = False
-    &#34;&#34;&#34;Whether to use `submitit` to run jobs on a Slurm cluster.&#34;&#34;&#34;
-    slurm_acct: str = &#34;PAS2136&#34;
-    &#34;&#34;&#34;Slurm account string.&#34;&#34;&#34;
+    slurm_acct: str = &#34;&#34;
+    &#34;&#34;&#34;Slurm account string. Empty means to not use Slurm.&#34;&#34;&#34;
+    slurm_partition: str = &#34;&#34;
+    &#34;&#34;&#34;Slurm partition.&#34;&#34;&#34;
+    n_hours: float = 24.0
+    &#34;&#34;&#34;Slurm job length in hours.&#34;&#34;&#34;
     log_to: str = os.path.join(&#34;.&#34;, &#34;logs&#34;)
     &#34;&#34;&#34;Where to log Slurm job stdout/stderr.&#34;&#34;&#34;</code></pre>
 </details>
@@ -621,6 +623,10 @@ class Train:
 <dt id="saev.config.Train.lr"><code class="name">var <span class="ident">lr</span> : float</code></dt>
 <dd>
 <div class="desc"><p>Learning rate.</p></div>
+</dd>
+<dt id="saev.config.Train.n_hours"><code class="name">var <span class="ident">n_hours</span> : float</code></dt>
+<dd>
+<div class="desc"><p>Slurm job length in hours.</p></div>
 </dd>
 <dt id="saev.config.Train.n_lr_warmup"><code class="name">var <span class="ident">n_lr_warmup</span> : int</code></dt>
 <dd>
@@ -654,13 +660,13 @@ class Train:
 <dd>
 <div class="desc"><p>Random seed.</p></div>
 </dd>
-<dt id="saev.config.Train.slurm"><code class="name">var <span class="ident">slurm</span> : bool</code></dt>
-<dd>
-<div class="desc"><p>Whether to use <code>submitit</code> to run jobs on a Slurm cluster.</p></div>
-</dd>
 <dt id="saev.config.Train.slurm_acct"><code class="name">var <span class="ident">slurm_acct</span> : str</code></dt>
 <dd>
-<div class="desc"><p>Slurm account string.</p></div>
+<div class="desc"><p>Slurm account string. Empty means to not use Slurm.</p></div>
+</dd>
+<dt id="saev.config.Train.slurm_partition"><code class="name">var <span class="ident">slurm_partition</span> : str</code></dt>
+<dd>
+<div class="desc"><p>Slurm partition.</p></div>
 </dd>
 <dt id="saev.config.Train.tag"><code class="name">var <span class="ident">tag</span> : str</code></dt>
 <dd>
@@ -1113,6 +1119,7 @@ setTimeout(() => input.focus(), 100);
 <li><code><a title="saev.config.Train.log_every" href="#saev.config.Train.log_every">log_every</a></code></li>
 <li><code><a title="saev.config.Train.log_to" href="#saev.config.Train.log_to">log_to</a></code></li>
 <li><code><a title="saev.config.Train.lr" href="#saev.config.Train.lr">lr</a></code></li>
+<li><code><a title="saev.config.Train.n_hours" href="#saev.config.Train.n_hours">n_hours</a></code></li>
 <li><code><a title="saev.config.Train.n_lr_warmup" href="#saev.config.Train.n_lr_warmup">n_lr_warmup</a></code></li>
 <li><code><a title="saev.config.Train.n_patches" href="#saev.config.Train.n_patches">n_patches</a></code></li>
 <li><code><a title="saev.config.Train.n_sparsity_warmup" href="#saev.config.Train.n_sparsity_warmup">n_sparsity_warmup</a></code></li>
@@ -1121,8 +1128,8 @@ setTimeout(() => input.focus(), 100);
 <li><code><a title="saev.config.Train.sae" href="#saev.config.Train.sae">sae</a></code></li>
 <li><code><a title="saev.config.Train.sae_batch_size" href="#saev.config.Train.sae_batch_size">sae_batch_size</a></code></li>
 <li><code><a title="saev.config.Train.seed" href="#saev.config.Train.seed">seed</a></code></li>
-<li><code><a title="saev.config.Train.slurm" href="#saev.config.Train.slurm">slurm</a></code></li>
 <li><code><a title="saev.config.Train.slurm_acct" href="#saev.config.Train.slurm_acct">slurm_acct</a></code></li>
+<li><code><a title="saev.config.Train.slurm_partition" href="#saev.config.Train.slurm_partition">slurm_partition</a></code></li>
 <li><code><a title="saev.config.Train.tag" href="#saev.config.Train.tag">tag</a></code></li>
 <li><code><a title="saev.config.Train.track" href="#saev.config.Train.track">track</a></code></li>
 <li><code><a title="saev.config.Train.wandb_project" href="#saev.config.Train.wandb_project">wandb_project</a></code></li>

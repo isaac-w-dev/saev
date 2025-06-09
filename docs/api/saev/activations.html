@@ -482,7 +482,7 @@ class Dataset(torch.utils.data.Dataset):
             samples = torch.stack([sample[&#34;act&#34;] for sample in samples])
             if samples.abs().max() &gt; 1e3:
                 raise ValueError(
-                    &#34;You found an abnormally large activation {example.abs().max().item():.5f} that will mess up your L2 mean.&#34;
+                    f&#34;You found an abnormally large activation {samples.abs().max().item():.5f} that will mess up your L2 mean.&#34;
                 )
 
             # Activation mean
@@ -593,9 +593,6 @@ class Dataset(torch.utils.data.Dataset):
             case _:
                 print((self.cfg.patches, self.cfg.layer))
                 typing.assert_never((self.cfg.patches, self.cfg.layer))
-
-    def get_shard_patches(self):
-        raise NotImplementedError()
 
     def get_img_patches(
         self, i: int
@@ -709,12 +706,6 @@ def d_vit(self) -&gt; int:
 <dl>
 <dt id="saev.activations.Dataset.get_img_patches"><code class="name flex">
 <span>def <span class="ident">get_img_patches</span></span>(<span>self, i: int) ‑> jaxtyping.Float[ndarray, 'n_layers all_patches d_vit']</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="saev.activations.Dataset.get_shard_patches"><code class="name flex">
-<span>def <span class="ident">get_shard_patches</span></span>(<span>self)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -1612,7 +1603,6 @@ setTimeout(() => input.focus(), 100);
 <li><code><a title="saev.activations.Dataset.cfg" href="#saev.activations.Dataset.cfg">cfg</a></code></li>
 <li><code><a title="saev.activations.Dataset.d_vit" href="#saev.activations.Dataset.d_vit">d_vit</a></code></li>
 <li><code><a title="saev.activations.Dataset.get_img_patches" href="#saev.activations.Dataset.get_img_patches">get_img_patches</a></code></li>
-<li><code><a title="saev.activations.Dataset.get_shard_patches" href="#saev.activations.Dataset.get_shard_patches">get_shard_patches</a></code></li>
 <li><code><a title="saev.activations.Dataset.layer_index" href="#saev.activations.Dataset.layer_index">layer_index</a></code></li>
 <li><code><a title="saev.activations.Dataset.metadata" href="#saev.activations.Dataset.metadata">metadata</a></code></li>
 <li><code><a title="saev.activations.Dataset.scalar" href="#saev.activations.Dataset.scalar">scalar</a></code></li>

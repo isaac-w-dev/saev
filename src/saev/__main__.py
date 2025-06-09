@@ -58,12 +58,13 @@ def train(
 
     logger.info("Running %d training jobs.", len(cfgs))
 
-    if cfg.slurm:
+    if cfg.slurm_acct:
         executor = submitit.SlurmExecutor(folder=cfg.log_to)
         executor.update_parameters(
-            time=60,
-            partition="preemptible",
+            time=int(cfg.n_hours * 60),
+            partition=cfg.slurm_partition,
             gpus_per_node=1,
+            ntasks_per_node=1,
             cpus_per_task=cfg.n_workers + 4,
             stderr_to_stdout=True,
             account=cfg.slurm_acct,

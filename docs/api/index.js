@@ -190,12 +190,6 @@ INDEX=[
 "doc":"Dimension of the underlying vision transformer's embedding space."
 },
 {
-"ref":"saev.activations.Dataset.get_shard_patches",
-"url":1,
-"doc":"",
-"func":1
-},
-{
 "ref":"saev.activations.Dataset.get_img_patches",
 "url":1,
 "doc":"",
@@ -802,6 +796,11 @@ INDEX=[
 "doc":"Learning rate."
 },
 {
+"ref":"saev.config.Train.n_hours",
+"url":6,
+"doc":"Slurm job length in hours."
+},
+{
 "ref":"saev.config.Train.n_lr_warmup",
 "url":6,
 "doc":"Number of learning rate warmup steps."
@@ -842,14 +841,14 @@ INDEX=[
 "doc":"Random seed."
 },
 {
-"ref":"saev.config.Train.slurm",
-"url":6,
-"doc":"Whether to use  submitit to run jobs on a Slurm cluster."
-},
-{
 "ref":"saev.config.Train.slurm_acct",
 "url":6,
-"doc":"Slurm account string."
+"doc":"Slurm account string. Empty means to not use Slurm."
+},
+{
+"ref":"saev.config.Train.slurm_partition",
+"url":6,
+"doc":"Slurm partition."
 },
 {
 "ref":"saev.config.Train.tag",

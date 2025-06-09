@@ -330,7 +330,7 @@ class Dataset(torch.utils.data.Dataset):
             samples = torch.stack([sample["act"] for sample in samples])
             if samples.abs().max() > 1e3:
                 raise ValueError(
-                    "You found an abnormally large activation {example.abs().max().item():.5f} that will mess up your L2 mean."
+                    f"You found an abnormally large activation {samples.abs().max().item():.5f} that will mess up your L2 mean."
                 )
 
             # Activation mean
@@ -441,9 +441,6 @@ class Dataset(torch.utils.data.Dataset):
             case _:
                 print((self.cfg.patches, self.cfg.layer))
                 typing.assert_never((self.cfg.patches, self.cfg.layer))
-
-    def get_shard_patches(self):
-        raise NotImplementedError()
 
     def get_img_patches(
         self, i: int

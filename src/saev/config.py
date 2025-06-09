@@ -246,10 +246,12 @@ class Train:
     """Hardware device."""
     seed: int = 42
     """Random seed."""
-    slurm: bool = False
-    """Whether to use `submitit` to run jobs on a Slurm cluster."""
-    slurm_acct: str = "PAS2136"
-    """Slurm account string."""
+    slurm_acct: str = ""
+    """Slurm account string. Empty means to not use Slurm."""
+    slurm_partition: str = ""
+    """Slurm partition."""
+    n_hours: float = 24.0
+    """Slurm job length in hours."""
     log_to: str = os.path.join(".", "logs")
     """Where to log Slurm job stdout/stderr."""
 
