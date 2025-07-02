@@ -327,15 +327,15 @@ def get_topk_patch(cfg: config.Visuals) -> TopKPatch:
 
     for batch in helpers.progress(dataloader, desc="picking top-k"):
         vit_acts_BD = batch["act"]
-        print("Vit acts BD", vit_acts_BD)
+        # print("Vit acts BD", vit_acts_BD)
         sae_acts_BS = get_sae_acts(vit_acts_BD, sae, cfg)
-        print("SAE acts BS:", sae_acts_BS)
+        # print("SAE acts BS:", sae_acts_BS)
         for sae_act_S in sae_acts_BS:
             estimator.update(sae_act_S)
-            print("Estimator Update:", estimator)
+            # print("Estimator Update:", estimator)
 
         sae_acts_SB = einops.rearrange(sae_acts_BS, "batch d_sae -> d_sae batch")
-        print("SAE acts SB:", sae_acts_SB)
+        # print("SAE acts SB:", sae_acts_SB)
 
         distributions_MN[:, batch["image_i"]] = sae_acts_SB[: cfg.n_distributions].to(
             "cpu"

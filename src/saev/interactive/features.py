@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.13.15"
+__generated_with = "0.14.0"
 app = marimo.App(width="full")
 
 
@@ -21,13 +21,24 @@ def _():
 
 
 @app.cell
+def _(mo):
+    mo.md(
+        r"""
+    Enter the directory to your checkpoints in os.listdir(
+    )
+    """
+    )
+    return
+
+
+@app.cell
 def _(mo, os):
     def make_ckpt_dropdown():
         try:
             choices = sorted(
-                os.listdir("/users/PZS1151/igwilson99/local/src/saev/checkpoints/")
+                os.listdir("/local/scratch/wilson.5057/checkpoints")
             )
-
+            print(choices)
         except FileNotFoundError:
             choices = []
 
@@ -44,6 +55,12 @@ def _(ckpt_dropdown, mo):
 
 
 @app.cell
+def _(mo):
+    mo.md(r"""Under webapp_directory you can just put the same as you did for os.listdir() ckpt_dropdown.value should get you to where you need to be and all you'll need to put after it is /sort_by_patch""")
+    return
+
+
+@app.cell
 def _(ckpt_dropdown, mo):
     mo.stop(
         ckpt_dropdown.value is None,
@@ -52,7 +69,7 @@ def _(ckpt_dropdown, mo):
         ),
     )
 
-    webapp_dir = f"/users/PZS1151/igwilson99/local/src/saev/checkpoints/"
+    webapp_dir = f"/local/scratch/wilson.5057/checkpoints/{ckpt_dropdown.value}/sort_by_patch"
 
     get_i, set_i = mo.state(0)
     return get_i, set_i, webapp_dir
@@ -141,11 +158,6 @@ def _(get_i, mo, neurons, set_i):
 
 
 @app.cell
-def _():
-    return
-
-
-@app.cell
 def _(
     display_info,
     get_i,
@@ -161,11 +173,6 @@ def _(
     {mo.hstack([prev_button, next_button, display_info(**neurons[get_i()])], justify="start")}
     {neuron_slider}
     """)
-    return
-
-
-@app.cell
-def _():
     return
 
 
@@ -367,31 +374,6 @@ def _(mo):
 def _(mo):
     value_slider = mo.ui.range_slider(start=-3, stop=1, step=0.1, value=[-0.75, 1.0])
     return (value_slider,)
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
-
-
-@app.cell
-def _():
-    return
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.13.15"
+__generated_with = "0.14.0"
 app = marimo.App(width="medium")
 
 
@@ -48,6 +48,7 @@ def _(mo):
 def _():
     WANDB_USERNAME = "igwilson99-the-ohio-state-university"
     WANDB_PROJECT = "saev"
+
     return WANDB_PROJECT, WANDB_USERNAME
 
 
@@ -266,6 +267,7 @@ def _(
 
     @beartype.beartype
     def find_metadata(shard_root: str):
+        shard_root = "/local/scratch/wilson.5057/activations/406094ac63e6de7a592d5ddbaa581e147d51a2596e39732dafe2171cfe15225b/"
         if not os.path.exists(shard_root):
             msg = f"""
     ERROR: Shard root '{shard_root}' not found. You need to either:
