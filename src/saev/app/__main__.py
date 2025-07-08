@@ -61,7 +61,7 @@ logger.info("Set global constants.")
 def load_vit(
     model_cfg: modeling.Config,
 ) -> tuple[
-    activations.WrappedVisionTransformer,
+    activations.RecordedVisionTransformer,
     typing.Callable,
     float,
     Float[Tensor, " d_vit"],
@@ -69,7 +69,7 @@ def load_vit(
     """
     Returns the wrapped ViT, the vit transform, the activation scalar and the activation mean to normalize the activations.
     """
-    vit = activations.WrappedVisionTransformer(model_cfg.wrapped_cfg).to(DEVICE).eval()
+    vit = activations.RecordedVisionTransformer(model_cfg.wrapped_cfg).to(DEVICE).eval()
     vit_transform = activations.make_img_transform(
         model_cfg.vit_family, model_cfg.vit_ckpt
     )
@@ -121,10 +121,10 @@ def load_tensors(
 def get_image(example_id: str) -> list[str]:
     dataset, split, i_str = example_id.split("__")
     i = int(i_str)
-    img_v_raw, label = data.get_img_v_raw(f"{dataset}__{split}", i)
+    img_v_raw, label = data.get_img_raw(f"{dataset}__{split}", i)
     img_v_sized = data.to_sized(img_v_raw, RESIZE_SIZE, CROP_SIZE)
 
-    return [data.vips_to_base64(img_v_sized), label]
+    return [data.img_to_b64(img_v_sized), label]
 
 
 @jaxtyped(typechecker=beartype.beartype)

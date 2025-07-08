@@ -13,8 +13,8 @@ logger = logging.getLogger("app.data")
 @functools.cache
 def get_datasets():
     datasets = {
-        "inat21__train_mini": torchvision.datasets.ImageFolder(
-            root="/research/nfs_su_809/workspace/stevens.994/datasets/inat21/train_mini/"
+        "inat21__train": torchvision.datasets.ImageFolder(
+            root="/local/scratch/stevens.994/datasets/inat21/train"
         ),
         "imagenet__train": activations.ImageNet(config.ImagenetDataset()),
     }
