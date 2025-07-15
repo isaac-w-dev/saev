@@ -32,7 +32,7 @@ def make_crops(image, predictions_json_txt):
     """
     cropped_images = []
     try:
-        predictions_json_txt
+        print('Output for testing', predictions_json_txt)
         predictions = json.loads(predictions_json_txt)
     except json.JSONDecodeError as e:
         print(str(e))
@@ -53,7 +53,7 @@ def make_crops(image, predictions_json_txt):
 def generate_content_str(api_key, prompt, pil_image, retries = 2):
     client = genai.Client(api_key=api_key)
     generate_content_config = types.GenerateContentConfig(
-        # response_mime_type="application/json",
+        response_mime_type="application/json",
         temperature=0.0,
     )
     while True:
@@ -79,6 +79,7 @@ def generate_content_str(api_key, prompt, pil_image, retries = 2):
                 raise e
             print(f"Retrying... {e}")
             time.sleep(5)
+
 def predict_species(img):
     predictions = classifier.predict([img], Rank.SPECIES, k=1)
     return predictions[0]
