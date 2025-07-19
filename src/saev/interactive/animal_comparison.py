@@ -167,7 +167,7 @@ def _(mo):
 @app.cell
 def _(mo):
     def display_image(image_location):
-        return mo.image(image_location)
+        return mo.image(src=image_location, width=200, rounded=True)
     return (display_image,)
 
 
@@ -175,7 +175,11 @@ def _(mo):
 def _(json):
     def display_metadata(metadata_location):
         with open(metadata_location) as metadata:
-            return json.load(metadata)
+            data = json.load(metadata)
+            # data['neuron']
+            # data['log10_freq']
+            # data['log10_value']
+            return data
     return (display_metadata,)
 
 
